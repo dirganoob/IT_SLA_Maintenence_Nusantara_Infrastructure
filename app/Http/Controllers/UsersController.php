@@ -1,0 +1,124 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use Illuminate\Support\Carbon;
+
+
+class UsersController extends Controller
+{
+    public function users()
+    {
+        $title = 'MUN | User';
+        return view('pages.users.users', compact('title'));
+    }
+
+    public function updateusers(Request $request, $id)
+    {
+        // dd($request);
+        $updateuser = $request->validate([
+            'nama' => 'required|max:255',
+            'email' => 'required|email',
+            'foto' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'ttd' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            $updateuser['foto'] = $request->file('foto')->store('users-foto');
+        }
+        if ($request->hasFile('ttd')) {
+            $updateuser['ttd'] = $request->file('ttd')->store('users-ttd');
+        }
+
+        User::where('id', $request->id)->update($updateuser);
+
+        return redirect('/users');
+    }
+
+    public function allusers(Request $request)
+    {
+        $this -> authorize('superadmin');
+        $title = 'MUN | All User';
+        $pagination = 10;
+        $allusers = DB::table('users')->paginate($pagination);
+
+        return view('pages.users.allusers', ['allusers' => $allusers], compact('title'))->with('i', ($request->input('page', 1) - 1) *  $pagination);
+    }
+
+    public function editallusers($id)
+    {
+
+        $users = DB::table('users')->where('id', $id)->get();
+
+        return view('pages.users.allusers', ['users' => $users]);
+    }
+
+    public function updateallusers(Request $request, $id)
+    {
+
+        $title = 'MUN | All User';
+
+        $allusers = $request->validate([
+            'nama' => 'required|max:255',
+            'email' => 'required|email',
+            'jabatan' => 'required',
+            'role' => 'required',
+            'foto' => 'image|file',
+        ]);
+
+        // if ($request->file('foto')) {
+        //     $allusers['foto'] = $request->file('foto')->store('users-foto');
+        // }
+
+        User::where('id', $request->id)->update($allusers);
+
+        toast('User Telah Berhasil Di Update', 'success');
+        return redirect('/allusers');
+    }
+
+    public function addallusers(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nama' => 'required|max:255',
+            'email' => 'required|email',
+            'password' => 'required|min:3',
+            'jabatan' => 'required',
+            'foto' => 'image|file',
+
+        ]);
+
+        if ($request->file('foto')) {
+            $validatedData['foto'] = $request->file('foto')->store('users-foto');
+        }
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+
+        // dd($request);
+        User::create($validatedData);
+        return redirect('/allusers');
+    }
+
+    public function deleteallusers($id)
+    {
+        DB::table('users')->where('id', $id)->delete();
+
+        Alert::success('Success', 'Data User Telah berhasil dihapus');
+        return redirect('/allusers');
+    }
+
+    public function print_allusers(Request $request)
+    {
+        $title = 'Print Page';
+
+        $date = Carbon::now()->format('d-m-Y');
+        $allusers = DB::table('users')->get();
+
+        return view('pages.users.printallusers', ['allusers' => $allusers, 'date' => $date], compact('title'))->with('i', ($request->input('page', 1) - 1));
+    }
+}
