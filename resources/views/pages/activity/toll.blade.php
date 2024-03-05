@@ -19,7 +19,7 @@
                     <div class="demo-inline-spacing">
                         <div class="d-flex justify-content-end">
                             <button type="button" class="btn btn-icon btn-primary m-1" data-bs-toggle="modal"
-                                data-bs-target="#fullscreenModal"">
+                                data-bs-target="#fullscreenModal">
                                 <span class="tf-icons bx bx-plus"></span>
                             </button>
                             <button type="button" class="btn btn-icon btn-secondary m-1" data-bs-toggle="modal"
@@ -146,8 +146,11 @@
                                     <td>{{ $t->kategori }}</td>
                                     <td>{{ $t->user->nama }}</td>
                                     <td>
-                                        <button type="button" class="btn btn-warning active">Pending</button>
-                                    </td>
+                                        ($t->status == 'on process')
+                                        <button type="button" class="btn btn-info active">On process</button>
+                                        
+                                                        
+                                        </td>
                                     <td>
                                         <button class="btn btn-icon btn-success me-1" type="button" data-bs-toggle="modal"
                                             data-bs-target="#basicModalView{{ $t->id }}" aria-expanded="false"

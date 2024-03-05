@@ -18,7 +18,7 @@
                             @foreach ($activitydetail as $d)
                                 <div class="col-md-4 d-flex justify-content-center align-items-center">
                                     @if ($d->foto)
-                                        <img class="card-img card-img-left" src="{{ asset('costum_link/' . basename($d->foto)) }}"
+                                        <img class="card-img card-img-left" src="{{ asset('my_costum_link/' . basename($d->foto)) }}"
                                             style="width:250px" alt="Card image" />
                                     @else
                                         <img src="{{ asset('img/Logo/mun.png') }}" alt=""

@@ -169,7 +169,7 @@
                                                                             <p>Shift : {{ $t->shift }}</p>
                                                                             <p>Lokasi :{{ $t->lokasi }}</p>
                                                                             <p>Kategori :{{ $t->kategori }}</p>
-                                                                        </div>
+                                                                        </div> 
                                                                     </div>
                                                                 </div>
 

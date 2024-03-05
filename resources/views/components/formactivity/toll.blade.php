@@ -1,3 +1,24 @@
+<script>
+    function updateStatusButton(selectElement) {
+        var selectedValue = selectElement.value;
+        var buttonElement = selectElement.closest('td').nextElementSibling; // Assuming the button is the next sibling
+
+        if (buttonElement) {
+            // Remove existing classes
+            buttonElement.classList.remove('btn-warning', 'btn-info', 'btn-success');
+
+            // Add new class based on the selected value
+            if (selectedValue === 'pending') {
+                buttonElement.classList.add('btn-warning');
+            } else if (selectedValue === 'on process') {
+                buttonElement.classList.add('btn-info');
+            } else if (selectedValue === 'completed') {
+                buttonElement.classList.add('btn-success');
+            }
+        }
+    }
+</script>
+
 <div class="modal fade" id="fullscreenModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -229,20 +250,26 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+
+
+                  <div class="row mb-3">
     <label class="col-sm-2 col-form-label" for="basic-icon-default-company">Status</label>
     <div class="col-sm-10">
         <div class="input-group input-group-merge">
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Pending
-                </button>
-            </div>
+            <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-info-circle"></i></span>
+            <select class="form-select" id="status" name="status" required>
+                <option value="$t -">Pending</option>
+                <option value="on process">On Process</option>
+                <option value="completed">Completed</option>
+            </select>
         </div>
     </div>
 </div>
 
-
+                   
+                   
+                   
+                   
                     <button type="submit" class="btn btn-primary" name="simpan">Save Data</button>
                 </form>
             </div>

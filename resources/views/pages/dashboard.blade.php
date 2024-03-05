@@ -10,7 +10,7 @@
             <div class="d-flex align-items-end row">
                 <div class="col-sm-7">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">Welcome {{ auth()->user()->nama }} 🎉</h5>
+                        <h5 class="card-title text-primary">Welcome {{ auth()->user() ? auth()->user()->nama : 'Guest' }} 🎉</h5>
                         
                         <p class="mb-4">
                             Kamu Punya <span class="fw-bold">{{ $jumlahactivity }}</span> Tambahan Permintaan Activity

@@ -16,7 +16,7 @@
                     <div class="card-body">
                     <div class="d-flex align-items-start align-items-sm-center gap-4">
                         @if (auth()->user()->foto)
-                            <img src="{{ asset('storage/' .auth()->user()->foto) }}" alt="" style="width: 200px; height: 200px" class="rounded">
+                            <img src="{{ asset('my_second_costum_link/' .basename(auth()->user()->foto)) }}" alt="" style="width: 200px; height: 200px" class="rounded">
                             
                         @else
                             <img src="{{ asset('img/Logo/mun.png') }}" alt="" style="max-height: 200px; width: 180px">

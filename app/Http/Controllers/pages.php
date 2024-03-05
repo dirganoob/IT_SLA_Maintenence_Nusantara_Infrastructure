@@ -56,6 +56,7 @@ class pages extends Controller
 
 
         return view('pages.dashboard', compact('title'))->with([
+            'title' => $title,
             'mayor' => $mayor,
             'perbaikan' => $perbaikan,
             'pergantian' => $pergantian,

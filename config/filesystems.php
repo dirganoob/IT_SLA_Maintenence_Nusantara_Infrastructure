@@ -68,7 +68,9 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
-        public_path('costum_link') => storage_path('app/activity-foto'),
+        public_path('my_costum_link') => storage_path('app/activity-foto'),
+        public_path('my_second_costum_link') => storage_path('app/users-foto'),
+        public_path('my_ttd_costum_link') => storage_path('app/users-ttd'),
     ],
 
 ];

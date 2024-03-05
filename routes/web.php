@@ -19,15 +19,16 @@ Route::post('/login', 'App\Http\Controllers\AuthController@authenticate');
 Route::get('/register', 'App\Http\Controllers\AuthController@registerview');
 Route::post('/register', 'App\Http\Controllers\AuthController@store');
 
-Route::group(['middleware' => ['auth', 'CekRole:superadmin,user,atasan it,it']], function(){
+
 
     //Logout
     Route::post('/logout', 'App\Http\Controllers\AuthController@logout');
 
     // Main Route
-    Route::get('/dashboard', 'App\Http\Controllers\pages@index');
+
     Route::get('/scheadule', 'App\Http\Controllers\ScheaduleController@scheadule');
     Route::get('/toll', 'App\Http\Controllers\ActivityController@toll');
+    Route::get('/dashboard', 'App\Http\Controllers\pages@index');
     Route::get('/nontoll', 'App\Http\Controllers\ActivityController@nontoll');
     Route::get('/pengembangan', 'App\Http\Controllers\ActivityController@pengembangan');
     Route::get('/location', 'App\Http\Controllers\LocationController@location');
@@ -109,7 +110,6 @@ Route::group(['middleware' => ['auth', 'CekRole:superadmin,user,atasan it,it']],
 
     Route::get('/jadwal/print_jadwal', 'App\Http\Controllers\JadwalController@printjadwal');
 
-});
 
 
 

@@ -15,7 +15,7 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->post('/user', function (Request $request) {      
     return $request->user();
 });
 
@@ -24,6 +24,17 @@ Route::group(['middleware' => 'api', 'prefix' => 'auth'], function($router){
     Route::post('/login',[AuthController::class,'login']);
 });
 
+// Main Route
+
+Route::get('/scheadule', 'App\Http\Controllers\ScheaduleController@scheadule');
+Route::get('/toll', 'App\Http\Controllers\ActivityController@toll');
+Route::get('/nontoll', 'App\Http\Controllers\ActivityController@nontoll');
+Route::get('/pengembangan', 'App\Http\Controllers\ActivityController@pengembangan');
+Route::get('/location', 'App\Http\Controllers\LocationController@location');
+Route::get('/kategori', 'App\Http\Controllers\KategoriController@kategori');
+Route::get('/users', 'App\Http\Controllers\UsersController@users');
+Route::get('/allusers', 'App\Http\Controllers\UsersController@allusers');
+Route::get('/dashboard', 'App\Http\Controllers\pages@index');
 
 
 
